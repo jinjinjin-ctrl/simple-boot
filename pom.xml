@@ -15,6 +15,7 @@
     <properties>
         <java.version>17</java.version>
         <mysql.version>8.0.32</mysql.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
     </properties>
     <dependencies>
         <dependency>
@@ -30,7 +31,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
