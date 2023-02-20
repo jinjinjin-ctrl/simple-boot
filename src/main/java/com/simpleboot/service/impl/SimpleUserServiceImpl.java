@@ -5,13 +5,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.simpleboot.entity.User;
 import com.simpleboot.mapper.SimpleUserMapper;
 import com.simpleboot.service.SimpleUserService;
-import com.simpleboot.entity.Result;
+import com.simpleboot.utils.Result;
 import com.simpleboot.utils.Sha1Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class SimpleUserServiceImpl implements SimpleUserService {
 
     @Autowired
@@ -24,7 +26,6 @@ public class SimpleUserServiceImpl implements SimpleUserService {
 
     @Override
     public User selectSimpleUserByEmail(String email) {
-
         Wrapper<User> tWrapper = new QueryWrapper<User>().eq("user_email", email);
         return userMapper.selectOne(tWrapper);
     }
@@ -37,21 +38,16 @@ public class SimpleUserServiceImpl implements SimpleUserService {
     @Override
     public Result insertSimpleUser(User simpleUser) {
         String userEmail = simpleUser.getUserEmail();
-        String userName = simpleUser.getUserName();
         String userPassword = simpleUser.getUserPassword();
-        if (userEmail == "" && userEmail == null && userEmail.equals("")) {
-            return Result.failure("创建用户邮箱为空");
+        if (userEmail == "" && userEmail == null) {
+            return new Result().resultFailure("创建用户邮箱为空");
         }
-        if (userName == "" && userName == null && userName.equals("")) {
-            return Result.failure("创建用户姓名为空");
-        }
-        if (userPassword == "" && userPassword == null && userPassword.equals("")) {
-            return Result.failure("创建用户密码为空");
+        if (userPassword == "" && userPassword == null) {
+            return new Result().resultFailure("创建用户密码为空");
         }
         simpleUser.setUserPassword(Sha1Util.inputPassFormPass(userPassword));
-
         simpleUser.setUserCreateTime(new Date());
-        return Result.success("创建成功", userMapper.insert(simpleUser));
+        return new Result().resultSuccess("创建成功", userMapper.insert(simpleUser));
     }
 
     @Override
