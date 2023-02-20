@@ -36,7 +36,7 @@ public interface SimpleUserService {
      * @param simpleUser 用户
      * @return 结果
      */
-    Result insertSimpleUser(User simpleUser);
+    Result<Void> insertSimpleUser(User simpleUser);
 
     /**
      * 修改视频

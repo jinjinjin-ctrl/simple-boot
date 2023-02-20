@@ -2,10 +2,10 @@ package com.simpleboot.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.simpleboot.entity.Result;
 import com.simpleboot.entity.User;
 import com.simpleboot.mapper.SimpleUserMapper;
 import com.simpleboot.service.SimpleUserService;
-import com.simpleboot.utils.Result;
 import com.simpleboot.utils.Sha1Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,14 +40,14 @@ public class SimpleUserServiceImpl implements SimpleUserService {
         String userEmail = simpleUser.getUserEmail();
         String userPassword = simpleUser.getUserPassword();
         if (userEmail == "" && userEmail == null) {
-            return new Result().resultFailure("创建用户邮箱为空");
+            return new Result().failure("创建用户邮箱为空");
         }
         if (userPassword == "" && userPassword == null) {
-            return new Result().resultFailure("创建用户密码为空");
+            return new Result().failure("创建用户密码为空");
         }
         simpleUser.setUserPassword(Sha1Util.inputPassFormPass(userPassword));
         simpleUser.setUserCreateTime(new Date());
-        return new Result().resultSuccess("创建成功", userMapper.insert(simpleUser));
+        return new Result().success("创建成功", userMapper.insert(simpleUser));
     }
 
     @Override
