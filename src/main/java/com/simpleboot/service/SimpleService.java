@@ -1,4 +1,4 @@
 package com.simpleboot.service;
 
-public class SimpleService {
+public interface SimpleService {
 }

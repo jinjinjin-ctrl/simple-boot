@@ -1,4 +1,6 @@
 package com.simpleboot.mapper;
 
-public class SimpleMapper {
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+public interface SimpleMapper extends BaseMapper {
 }

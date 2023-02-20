@@ -1,14 +1,13 @@
 package com.simpleboot.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.simpleboot.entity.SimpleVideo;
+import com.simpleboot.entity.User;
 
 /**
- * 视频Mapper接口
- * 
+ *  用户接口
+ *
  * @author administrator
  * @date 2023-02-17
  */
-public interface SimpleVideoMapper extends BaseMapper<SimpleVideo>
-{
+public interface SimpleUserMapper extends BaseMapper<User> {
 }

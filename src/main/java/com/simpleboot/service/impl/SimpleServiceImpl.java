@@ -1,4 +1,6 @@
 package com.simpleboot.service.impl;
 
-public class SimpleServiceImpl {
+import com.simpleboot.service.SimpleService;
+
+public class SimpleServiceImpl  implements SimpleService {
 }
