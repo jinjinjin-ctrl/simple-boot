@@ -1,7 +1,7 @@
 package com.simpleboot.service;
 
 import com.simpleboot.entity.User;
-import com.simpleboot.utils.Result;
+import com.simpleboot.entity.Result;
 
 import java.util.List;
 

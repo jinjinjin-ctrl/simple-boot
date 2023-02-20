@@ -1,9 +1,10 @@
-package com.simpleboot.utils;
+package com.simpleboot.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,25 +16,21 @@ import java.io.Serializable;
  */
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Result<T> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
-    private Integer count;
+
     private Integer code;
     private String msg;
     private T data;
 
-    public Result(Integer code,String msg,T data){
-        this.code = code;
-        this.msg = msg;
-        this.data = data;
+    public static <T>Result <T>success(String msg, T t) {
+        return new Result<T>(200, msg, t);
     }
 
-    public Result resultSuccess(String msg,T t){
-        return new Result(200,msg,t);
-    }
-    public Result resultFailure(String msg){
-        return new Result(300,msg,"");
+    public static Result<Void> failure(String msg) {
+        return new Result<>(300, msg, null);
     }
 }
