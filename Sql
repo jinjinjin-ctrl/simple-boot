@@ -1,6 +1,7 @@
 create table simple_user
 (
     user_id int auto_increment not null comment '抖音用户id',
+    user_email varchar(100) comment '用户邮箱',
     user_name varchar(100) comment '用户姓名',
     user_password varchar(100) comment '用户密码',
     user_follower_resume varchar(255)  comment '用户简介',

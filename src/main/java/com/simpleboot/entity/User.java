@@ -17,21 +17,25 @@ public class User {
     @TableId
     private Long userId;
 
+    /** 用户邮箱 */
+    @TableField("user_email")
+    private String userEmail;
+
     /** 用户姓名 */
     @TableField("user_name")
     private String userName;
 
     /** 用户密码 */
     @TableField("user_password")
-    private Long userPassword;
+    private String userPassword;
 
     /** 用户简介 */
     @TableField("user_follower_resume")
-    private Long userFollowerResume;
+    private String userFollowerResume;
 
     /** 用户头像 */
     @TableField("user_avatar")
-    private Long userAvatar;
+    private String userAvatar;
 
     /** 用户关注总数 */
     @TableField("user_follow_count")
@@ -39,7 +43,7 @@ public class User {
 
     /** 粉丝总数 */
     @TableField("user_follower_count")
-    private String userFollowerCount;
+    private Integer userFollowerCount;
 
     /** 是否关注 */
     @TableField("user_is_follow")

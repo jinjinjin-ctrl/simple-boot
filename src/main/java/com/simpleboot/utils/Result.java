@@ -29,4 +29,11 @@ public class Result<T> implements Serializable {
         this.msg = msg;
         this.data = data;
     }
+
+    public Result resultSuccess(String msg,T t){
+        return new Result(200,msg,t);
+    }
+    public Result resultFailure(String msg){
+        return new Result(300,msg,"");
+    }
 }
