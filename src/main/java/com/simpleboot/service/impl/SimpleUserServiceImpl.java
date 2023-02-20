@@ -40,18 +40,18 @@ public class SimpleUserServiceImpl implements SimpleUserService {
         String userName = simpleUser.getUserName();
         String userPassword = simpleUser.getUserPassword();
         if (userEmail == "" && userEmail == null && userEmail.equals("")) {
-            return new Result().failure("创建用户邮箱为空");
+            return Result.failure("创建用户邮箱为空");
         }
         if (userName == "" && userName == null && userName.equals("")) {
-            return new Result().failure("创建用户姓名为空");
+            return Result.failure("创建用户姓名为空");
         }
         if (userPassword == "" && userPassword == null && userPassword.equals("")) {
-            return new Result().failure("创建用户密码为空");
+            return Result.failure("创建用户密码为空");
         }
         simpleUser.setUserPassword(Sha1Util.inputPassFormPass(userPassword));
 
         simpleUser.setUserCreateTime(new Date());
-        return new Result().success("创建成功", userMapper.insert(simpleUser));
+        return Result.success("创建成功", userMapper.insert(simpleUser));
     }
 
     @Override

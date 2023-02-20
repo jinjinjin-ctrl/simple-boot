@@ -12,7 +12,6 @@ import java.io.Serializable;
  *
  * @author 27826
  * @version 1.0
- * @date 2021/4/12 22:54
  */
 
 @Data
@@ -26,8 +25,8 @@ public class Result<T> implements Serializable {
     private String msg;
     private T data;
 
-    public static <T>Result <T>success(String msg, T t) {
-        return new Result<T>(200, msg, t);
+    public static <T>Result <T> success(String msg, T t) {
+        return new Result<>(200, msg, t);
     }
 
     public static Result<Void> failure(String msg) {
