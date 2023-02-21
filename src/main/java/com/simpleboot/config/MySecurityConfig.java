@@ -2,7 +2,6 @@ package com.simpleboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,16 +13,16 @@ import org.springframework.security.web.SecurityFilterChain;
 public class MySecurityConfig {
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().
-                authorizeRequests(authz-> {
-                        authz.requestMatchers("/douyin/user/login","/douyin/user/register").permitAll()
-                                .requestMatchers("/static/**").permitAll()
-                                .anyRequest().authenticated();
-                }
-        ).httpBasic(Customizer.withDefaults());
 
-        return http.build();
+
+        return http.csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/douyin/user/login").permitAll()
+                .requestMatchers("/douyin/user/register/").permitAll()
+                .requestMatchers("/static/**").permitAll()
+                .and().build();
     }
+
 
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
