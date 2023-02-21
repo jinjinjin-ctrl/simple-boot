@@ -7,6 +7,7 @@ import com.simpleboot.entity.User;
 import com.simpleboot.mapper.SimpleUserMapper;
 import com.simpleboot.service.SimpleUserService;
 import com.simpleboot.utils.Sha1Util;
+import com.simpleboot.utils.isValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,8 @@ public class SimpleUserServiceImpl implements SimpleUserService {
     }
 
     @Override
-    public User selectSimpleUserByEmail(String email) {
-        Wrapper<User> tWrapper = new QueryWrapper<User>().eq("user_email", email);
+    public User selectSimpleUserByEmail(String username) {
+        Wrapper<User> tWrapper = new QueryWrapper<User>().eq("user_name", username);
         return userMapper.selectOne(tWrapper);
     }
 
@@ -37,12 +38,15 @@ public class SimpleUserServiceImpl implements SimpleUserService {
 
     @Override
     public Result<Void> insertSimpleUser(User simpleUser) {
-        String userEmail = simpleUser.getUserEmail();
+        String userName = simpleUser.getUserName();
         String userPassword = simpleUser.getUserPassword();
-        if (userEmail == "" && userEmail == null) {
+        if (userName == "" || userName == null) {
             return Result.failure("创建用户邮箱为空");
         }
-        if (userPassword == "" && userPassword == null) {
+        if (isValidUtil.checkEmail(userName)) {
+            return new Result().failure("用户邮箱格式错误");
+        }
+        if (userPassword == "" || userPassword == null) {
             return Result.failure("创建用户密码为空");
         }
         simpleUser.setUserPassword(Sha1Util.inputPassFormPass(userPassword));

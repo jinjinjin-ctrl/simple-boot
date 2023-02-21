@@ -1,6 +1,11 @@
 server:
   port: 8080
 spring:
+  security:
+    user:
+      name: zdx
+      password: 123456
+      roles: admin
   thymeleaf:
     cache: false
   datasource:

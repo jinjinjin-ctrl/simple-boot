@@ -18,10 +18,10 @@ public interface SimpleUserService {
     /**
      * 查询用户
      *
-     * @param email 用户邮箱
+     * @param username 用户邮箱
      * @return 视频
      */
-    User selectSimpleUserByEmail(String email);
+    User selectSimpleUserByEmail(String username);
     /**
      * 查询用户列表
      *

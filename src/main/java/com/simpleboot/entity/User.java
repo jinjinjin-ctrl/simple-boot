@@ -1,5 +1,6 @@
 package com.simpleboot.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -14,7 +15,7 @@ public class User {
     private static final long serialVersionUID = 1L;
 
     /** 用户唯一标识 */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long userId;
 
     /** 用户邮箱 */

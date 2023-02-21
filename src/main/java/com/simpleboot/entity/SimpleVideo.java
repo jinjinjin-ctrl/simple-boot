@@ -1,5 +1,6 @@
 package com.simpleboot.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -21,7 +22,7 @@ public class SimpleVideo
     private static final long serialVersionUID = 1L;
 
     /** 视频唯一标识 */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long videoId;
 
     /** 视频封面地址 */
