@@ -14,19 +14,38 @@ import org.springframework.security.web.SecurityFilterChain;
 public class MySecurityConfig {
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(
-                authz-> {
-                    try {
+        http.csrf().disable().
+                authorizeRequests(authz-> {
                         authz.requestMatchers("/douyin/user/login","/douyin/user/register").permitAll()
                                 .requestMatchers("/static/**").permitAll()
-                                .anyRequest().authenticated().and().csrf(csrf->csrf.disable());
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                                .anyRequest().authenticated();
                 }
         ).httpBasic(Customizer.withDefaults());
+
         return http.build();
     }
+
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http
+//                .csrf().disable()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authorizeHttpRequests()
+//                .requestMatchers(HttpMethod.POST, "/login").anonymous()
+//                .requestMatchers(HttpMethod.POST, "/check").anonymous()
+//                .requestMatchers(HttpMethod.GET, "/oauth/**").permitAll()
+//                .requestMatchers("/logout").authenticated()
+//                .requestMatchers("/admin/**").authenticated()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+//                .cors(withDefaults())
+//                .oauth2Login(withDefaults())
+//                .build();
+//    }
+
 
     @Bean
     protected WebSecurityCustomizer webSecurityCustomizer() {
