@@ -1,6 +1,6 @@
 package com.simpleboot.entity;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +27,7 @@ public class Result<T> implements Serializable {
     private Integer code;
     @JsonProperty("status_msg")
     private String msg;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
 

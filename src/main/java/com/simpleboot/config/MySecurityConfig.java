@@ -2,12 +2,14 @@ package com.simpleboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 
+@Profile("prod")
 @Configuration
 @EnableWebSecurity
 public class MySecurityConfig {
@@ -20,6 +22,7 @@ public class MySecurityConfig {
                 .requestMatchers("/douyin/user/login").permitAll()
                 .requestMatchers("/douyin/user/register/").permitAll()
                 .requestMatchers("/static/**").permitAll()
+                .anyRequest().authenticated()
                 .and().build();
     }
 

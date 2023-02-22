@@ -1,6 +1,11 @@
 server:
   port: 8080
+  servlet:
+    context-path: /douyin
+
 spring:
+  jackson:
+    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
   security:
     user:
       name: zdx

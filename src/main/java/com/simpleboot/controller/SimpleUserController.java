@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/douyin/user")
+@RequestMapping("/user")
 public class SimpleUserController {
     @Resource
     private SimpleUserService userService;
