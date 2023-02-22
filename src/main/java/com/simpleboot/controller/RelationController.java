@@ -2,8 +2,6 @@ package com.simpleboot.controller;
 
 import com.simpleboot.entity.Result;
 import com.simpleboot.entity.User;
-import com.simpleboot.entity.param.RelationActionParam;
-import com.simpleboot.entity.param.UserParam;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,22 +13,22 @@ import java.util.List;
 public class RelationController {
 
     @PostMapping("action")
-    public Result<Void> relationAction(@RequestParam(required = false) RelationActionParam relationActionParam){
+    public Result<Void> relationAction(@RequestParam("to_user_id") String toUserId,@RequestParam("action_type") String actionType,@RequestParam("token") String token){
         return Result.success();
     }
 
     @GetMapping("follow/list")
-    public Result<List<User>> follow(@RequestParam(required = false) UserParam userParam){
+    public Result<List<User>> follow(@RequestParam("user_id") String userId,@RequestParam String token){
         return Result.success();
     }
 
     @GetMapping("follower/list")
-    public Result<List<User>> follower(@RequestParam(required = false) UserParam userParam){
+    public Result<List<User>> follower(@RequestParam("user_id") String userId,@RequestParam String token){
         return Result.success();
     }
 
     @GetMapping("friend/list")
-    public Result<List<User>> friend(@RequestParam(required = false) UserParam userParam){
+    public Result<List<User>> friend(@RequestParam("user_id") String userId,@RequestParam String token){
         return Result.success();
     }
 }

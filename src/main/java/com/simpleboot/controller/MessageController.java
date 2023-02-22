@@ -1,7 +1,6 @@
 package com.simpleboot.controller;
 
 import com.simpleboot.entity.Result;
-import com.simpleboot.entity.param.UserParam;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.logging.log4j.message.Message;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +13,12 @@ import java.util.List;
 public class MessageController {
 
     @PostMapping("action")
-    public Result<Void> action(UserParam userParam){
+    public Result<Void> action(@RequestParam("user_id") String userId,@RequestParam String token){
         return Result.success();
     }
 
     @GetMapping("chat")
-    public Result<List<Message>> chat(UserParam userParam){
+    public Result<List<Message>> chat(@RequestParam("user_id") String userId,@RequestParam String token){
         return Result.success();
     }
 }
