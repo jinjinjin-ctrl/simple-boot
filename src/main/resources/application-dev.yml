@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /douyin
+
+spring:
+  security:
+    user:
+      name: zdx
+      password: 123456
+      roles: admin
+  thymeleaf:
+    cache: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.27.144.241:3306/simple?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true
+    username: ulbt
+    password: zpfcsjfa
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
