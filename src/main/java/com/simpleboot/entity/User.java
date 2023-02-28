@@ -46,10 +46,6 @@ public class User {
     @TableField("user_follower_count")
     private Integer userFollowerCount;
 
-    /** 是否关注 */
-    @TableField("user_is_follow")
-    private boolean userIsFollow;
-
     /** 创建时间 */
     @TableField("user_create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

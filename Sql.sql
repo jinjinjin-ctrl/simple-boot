@@ -8,7 +8,6 @@ create table simple_user
     user_avatar varchar(255) comment '用户头像',
     user_follow_count int comment '用户关注总数',
     user_follower_count int comment '粉丝总数',
-    user_is_follow boolean comment '是否关注',
     user_create_time DATE comment '创建时间',
     user_create_id int comment '创建用户id',
     user_modify_time DATE comment '修改时间',
@@ -70,3 +69,17 @@ create table simple_relation_action
     index simple_from_user_index(r_action_from_user_id),
     index simple_to_user_id(r_action_to_user_id)
 )comment '用户聊天';
+
+ALTER TABLE `simple_follower`
+    ADD COLUMN `id` int UNSIGNED NOT NULL AUTO_INCREMENT FIRST,
+    MODIFY COLUMN `follower_create_time` datetime NULL DEFAULT NULL COMMENT '关注时间' AFTER `follower_id`,
+    MODIFY COLUMN `follower_user_id` int NOT NULL COMMENT '关注主播id' AFTER `follower_create_time`,
+    DROP PRIMARY KEY,
+    ADD PRIMARY KEY (`id`) USING BTREE;
+
+CREATE TABLE `simple_user_friend` (
+      `from_user_id` int NOT NULL,
+      `to_user_id` int NOT NULL,
+      `is_accept` tinyint(1) DEFAULT NULL COMMENT '0 未选择,1 不接受, 2 接受',
+      PRIMARY KEY (`from_user_id`,`to_user_id`) USING BTREE
+) COMMENT='好友表';
