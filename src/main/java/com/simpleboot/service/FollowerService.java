@@ -1,8 +1,8 @@
 package com.simpleboot.service;
 
-import com.simpleboot.entity.Follower;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.simpleboot.entity.User;
+import com.simpleboot.entity.Follower;
+import com.simpleboot.entity.vo.UserVO;
 
 import java.util.List;
 
@@ -22,21 +22,24 @@ public interface FollowerService extends IService<Follower> {
     /**
      * 关注用户列表
      * @param userId 查询的用户Id
+     * @param currentUserId 当前的用户Id
      * @return 用户列表(关注)
      */
-    List<User> follow(String userId);
+    List<UserVO> follow(Integer userId, Integer currentUserId);
 
     /**
      * 用户粉丝列表
      * @param userId 查询的用户Id
+     * @param currentUserId 当前的用户Id
      * @return 用户列表(粉丝)
      */
-    List<User> follower(String userId);
+    List<UserVO> follower(Integer userId, Integer currentUserId);
 
     /**
      * 用户的好友列表
-     * @param userId 用户Id
+     * @param userId 查询的用户Id
+     * @param currentUserId 当前的用户Id
      * @return 用户列表(好友)
      */
-    List<User> friend(String userId);
+    List<UserVO> friend(Integer userId, Integer currentUserId);
 }

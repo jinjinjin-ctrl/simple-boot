@@ -4,15 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.simpleboot.entity.Follower;
 import com.simpleboot.entity.User;
+import com.simpleboot.entity.vo.UserVO;
 import com.simpleboot.mapper.FollowerMapper;
 import com.simpleboot.service.FollowerService;
-import com.simpleboot.service.SimpleUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * @author moli
@@ -21,7 +22,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class FollowerServiceImpl extends ServiceImpl<FollowerMapper, Follower> implements FollowerService {
-    private final SimpleUserService simpleUserService;
 
     @Override
     public void relationAction(Integer formUserId, String toUserId, int actionType) {
@@ -39,21 +39,29 @@ public class FollowerServiceImpl extends ServiceImpl<FollowerMapper, Follower> i
     }
 
     @Override
-    public List<User> follow(String userId) {
-        //TODO User关注状态
-        return baseMapper.follow(userId);
+    public List<UserVO> follow(Integer userId, Integer currentUserId) {
+        List<User> userFollow = baseMapper.follow(userId);
+        List<User> currentUserFollow = baseMapper.follow(currentUserId);
+        return userFollow.stream().map(v->new UserVO(v, currentUserFollow.contains(v))).collect(Collectors.toList());
     }
 
     @Override
-    public List<User> follower(String userId) {
-        //TODO User关注状态
-        return baseMapper.follower(userId);
+    public List<UserVO> follower(Integer userId, Integer currentUserId) {
+        //用户的粉丝列表
+        List<User> userFollower = baseMapper.follower(userId);
+        //当前用户的关注列表
+        List<User> currentUserFollow = baseMapper.follow(currentUserId);
+        //如果粉丝列表中的是当前用户关注的用户则is_follow字段为true
+        return userFollower.stream().map(v -> new UserVO(v, currentUserFollow.contains(v))).collect(Collectors.toList());
     }
 
     @Override
-    public List<User> friend(String userId) {
-        //TODO User关注状态
-        return baseMapper.friend(userId);
+    public List<UserVO> friend(Integer userId, Integer currentUserId) {
+        List<User> follower = baseMapper.follower(userId);
+        List<User> follow = baseMapper.follow(userId);
+        List<User> intersection = follow.stream().filter(follower::contains).toList();
+        List<User> currentFollow = baseMapper.follow(currentUserId);
+        return intersection.stream().map(v->new UserVO(v, currentFollow.contains(v))).toList();
     }
 
 

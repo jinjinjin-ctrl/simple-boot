@@ -52,22 +52,4 @@
         where follower_user_id = #{userId}
     </select>
 
-    <select id="friend" resultType="com.simpleboot.entity.User">
-        select simple_user.user_id,
-               simple_user.user_email,
-               simple_user.user_name,
-               simple_user.user_password,
-               simple_user.user_follower_resume,
-               simple_user.user_avatar,
-               simple_user.user_follow_count,
-               simple_user.user_follower_count,
-               simple_user.user_create_time,
-               simple_user.user_create_id,
-               simple_user.user_modify_time,
-               simple_user.user_modify_id
-        from simple_user_friend
-                 left join simple_user on simple_user.user_id = simple_user_friend.from_user_id
-        where simple_user.user_id = #{userId}
-    </select>
-
 </mapper>

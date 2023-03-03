@@ -1,7 +1,7 @@
 package com.simpleboot.controller;
 
 import com.simpleboot.entity.Result;
-import com.simpleboot.entity.User;
+import com.simpleboot.entity.vo.UserVO;
 import com.simpleboot.service.FollowerService;
 import com.simpleboot.utils.TokenUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -44,9 +44,9 @@ public class RelationController {
      * @return 关注的用户列表
      */
     @GetMapping("follow/list")
-    public Result<List<User>> follow(@RequestParam("user_id") String userId, @RequestParam String token) {
+    public Result<List<UserVO>> follow(@RequestParam("user_id") String userId, @RequestParam String token) {
         Integer currentUserId = tokenUtil.parser(token);
-        return Result.success(followerService.follow(userId));
+        return Result.success(followerService.follow(Integer.valueOf(userId), currentUserId));
     }
 
     /**
@@ -56,14 +56,14 @@ public class RelationController {
      * @return 粉丝的用户列表
      */
     @GetMapping("follower/list")
-    public Result<List<User>> follower(@RequestParam("user_id") String userId, @RequestParam String token) {
+    public Result<List<UserVO>> follower(@RequestParam("user_id") String userId, @RequestParam String token) {
         Integer currentUserId = tokenUtil.parser(token);
-        return Result.success(followerService.follower(userId));
+        return Result.success(followerService.follower(Integer.valueOf(userId), currentUserId));
     }
 
     @GetMapping("friend/list")
-    public Result<List<User>> friend(@RequestParam("user_id") String userId, @RequestParam String token) {
+    public Result<List<UserVO>> friend(@RequestParam("user_id") String userId, @RequestParam String token) {
         Integer currentUserId = tokenUtil.parser(token);
-        return Result.success(followerService.friend(userId));
+        return Result.success(followerService.friend(Integer.valueOf(userId), currentUserId));
     }
 }

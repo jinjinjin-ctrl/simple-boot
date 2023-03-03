@@ -4,6 +4,8 @@ server:
     context-path: /douyin
 
 spring:
+  profiles:
+    active: local
   security:
     user:
       name: zdx

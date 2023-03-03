@@ -16,21 +16,15 @@ public interface FollowerMapper extends BaseMapper<Follower> {
      * @param userId 查询的用户Id
      * @return 用户列表(关注)
      */
-    List<User> follow(String userId);
+    List<User> follow(Integer userId);
 
     /**
      * 用户粉丝列表
      * @param userId 查询的用户Id
      * @return 用户列表(粉丝)
      */
-    List<User> follower(String userId);
+    List<User> follower(Integer userId);
 
-    /**
-     * 用户的好友列表
-     * @param userId 用户Id
-     * @return 用户列表(好友)
-     */
-    List<User> friend(String userId);
 }
 
 
