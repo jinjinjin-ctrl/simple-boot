@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpleboot.mapper.MessageMapper">
+
+    <resultMap id="BaseResultMap" type="com.simpleboot.entity.RelationAction">
+            <id property="rActionId" column="r_action_id" jdbcType="BIGINT"/>
+            <result property="rActionContent" column="r_action_content" jdbcType="VARCHAR"/>
+            <result property="rActionCreateTime" column="r_action_create_time" jdbcType="DATE"/>
+            <result property="rActionFromUserId" column="r_action_from_user_id" jdbcType="INTEGER"/>
+            <result property="rActionToUserId" column="r_action_to_user_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        r_action_id,r_action_content,r_action_create_time,
+        r_action_from_user_id,r_action_to_user_id
+    </sql>
+</mapper>

@@ -58,11 +58,11 @@ create table simple_video_action
     index simple_action_video_id(v_action_user_id)
 )comment '视频评论';
 
-create table simple_relation_action
+create table simple_message
 (
     r_action_id bigint auto_increment not null comment '消息id',
     r_action_content longtext comment '消息内容',
-    r_action_create_time DATE comment '消息发送日期',
+    r_action_create_time DATETIME comment '消息发送日期',
     r_action_from_user_id int comment '发送用户id',
     r_action_to_user_id int comment '接收用户id',
     primary key (r_action_id),
@@ -76,10 +76,3 @@ ALTER TABLE `simple_follower`
     MODIFY COLUMN `follower_user_id` int NOT NULL COMMENT '关注主播id' AFTER `follower_create_time`,
     DROP PRIMARY KEY,
     ADD PRIMARY KEY (`id`) USING BTREE;
-
-CREATE TABLE `simple_user_friend` (
-      `from_user_id` int NOT NULL,
-      `to_user_id` int NOT NULL,
-      `is_accept` tinyint(1) DEFAULT NULL COMMENT '0 未选择,1 不接受, 2 接受',
-      PRIMARY KEY (`from_user_id`,`to_user_id`) USING BTREE
-) COMMENT='好友表';
