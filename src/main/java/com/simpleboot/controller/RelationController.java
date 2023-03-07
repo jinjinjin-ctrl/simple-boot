@@ -1,6 +1,6 @@
 package com.simpleboot.controller;
 
-import com.simpleboot.entity.Result;
+import com.simpleboot.entity.vo.Result;
 import com.simpleboot.entity.vo.UserVO;
 import com.simpleboot.service.FollowerService;
 import com.simpleboot.utils.TokenUtil;

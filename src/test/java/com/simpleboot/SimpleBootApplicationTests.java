@@ -1,8 +1,11 @@
 package com.simpleboot;
 
-import com.simpleboot.entity.Result;
 import com.simpleboot.entity.SimpleVideo;
+import com.simpleboot.entity.UserDetail;
+import com.simpleboot.entity.vo.Result;
 import com.simpleboot.mapper.SimpleVideoMapper;
+import com.simpleboot.service.SimpleUserService;
+import com.simpleboot.utils.JwtUtil;
 import com.simpleboot.utils.Sha1Util;
 import com.simpleboot.utils.isValidUtil;
 import org.junit.jupiter.api.Test;
@@ -16,6 +19,9 @@ import java.util.List;
 class SimpleBootApplicationTests {
     @Autowired
     private SimpleVideoMapper videoMapper;
+
+    @Autowired
+    private SimpleUserService userService;
 
     @Test
     void contextLoads() {
@@ -46,6 +52,13 @@ class SimpleBootApplicationTests {
         System.out.println(new Date());
     }
 
+    @Test
+    void testPassword(){
+        UserDetail userDetails = userService.loginUser("278268@qq.com");
+        String createtoken = JwtUtil.createtoken(userDetails);
+        System.out.println(createtoken);
+
+    }
     @Test
     void contextNull() {
 

@@ -1,11 +1,21 @@
 package com.simpleboot.service;
 
-import com.simpleboot.entity.Result;
 import com.simpleboot.entity.User;
+import com.simpleboot.entity.UserDetail;
+import com.simpleboot.entity.vo.Result;
 
 import java.util.List;
 
 public interface SimpleUserService {
+
+    /**
+     *  登录
+     * @param username 用户邮箱
+     * @return
+     */
+    UserDetail loginUser(String username);
+
+
 
     /**
      * 查询用户

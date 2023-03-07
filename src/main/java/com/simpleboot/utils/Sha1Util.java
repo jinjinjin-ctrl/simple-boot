@@ -11,6 +11,10 @@ public class Sha1Util {
         return passwordEncoder.encode(inputPass);
     }
 
+    public static boolean matchesPassword(String rowPassword, String inputPass){
+        return passwordEncoder.matches(rowPassword,inputPass);
+    }
+
     private static String byteArrayToHexString(byte[] bytes){
 
         StringBuilder string = new StringBuilder();

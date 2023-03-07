@@ -1,7 +1,7 @@
 package com.simpleboot.controller;
 
 import com.simpleboot.entity.RelationAction;
-import com.simpleboot.entity.Result;
+import com.simpleboot.entity.vo.Result;
 import com.simpleboot.service.MessageService;
 import com.simpleboot.utils.TokenUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;

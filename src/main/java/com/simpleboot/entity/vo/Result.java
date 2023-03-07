@@ -1,4 +1,4 @@
-package com.simpleboot.entity;
+package com.simpleboot.entity.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -2,8 +2,10 @@ package com.simpleboot.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.simpleboot.entity.Result;
+import com.simpleboot.entity.AuthEnum;
 import com.simpleboot.entity.User;
+import com.simpleboot.entity.UserDetail;
+import com.simpleboot.entity.vo.Result;
 import com.simpleboot.mapper.SimpleUserMapper;
 import com.simpleboot.service.SimpleUserService;
 import com.simpleboot.utils.Sha1Util;
@@ -11,14 +13,23 @@ import com.simpleboot.utils.isValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SimpleUserServiceImpl implements SimpleUserService {
 
     @Autowired
     private SimpleUserMapper userMapper;
+
+    @Override
+    public UserDetail loginUser(String username) {
+        Wrapper<User> tWrapper = new QueryWrapper<User>().eq("user_name", username);
+        User user = userMapper.selectOne(tWrapper);
+        List list = new ArrayList();
+        list.add(AuthEnum.PRESENT_USER);
+        UserDetail userDetail = new UserDetail(user, list);
+        return userDetail;
+    }
 
     @Override
     public User selectSimpleUserById(Long userId) {

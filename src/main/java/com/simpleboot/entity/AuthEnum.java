@@ -5,5 +5,5 @@ package com.simpleboot.entity;
  *
  */
 public enum AuthEnum {
-    PRESENT_USER(), OTHER_USER();
+     PRESENT_USER,OTHER_USER
 }

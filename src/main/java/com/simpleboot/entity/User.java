@@ -7,11 +7,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @TableName("simple_user")
-public class User {
+public class User  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 用户唯一标识 */
