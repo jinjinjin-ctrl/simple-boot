@@ -6,10 +6,13 @@ import com.simpleboot.entity.AuthEnum;
 import com.simpleboot.entity.User;
 import com.simpleboot.entity.UserDetail;
 import com.simpleboot.entity.vo.Result;
+import com.simpleboot.entity.vo.UserResult;
 import com.simpleboot.mapper.SimpleUserMapper;
 import com.simpleboot.service.SimpleUserService;
+import com.simpleboot.utils.JwtUtil;
 import com.simpleboot.utils.Sha1Util;
 import com.simpleboot.utils.isValidUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,21 +51,26 @@ public class SimpleUserServiceImpl implements SimpleUserService {
     }
 
     @Override
-    public Result<Void> insertSimpleUser(User simpleUser) {
+    public UserResult insertSimpleUser(User simpleUser) {
         String userName = simpleUser.getUserName();
         String userPassword = simpleUser.getUserPassword();
-        if (userName == "" || userName == null) {
-            return Result.failure("创建用户邮箱为空");
+        if (StringUtils.isEmpty(userName)) {
+            return UserResult.failure("创建用户邮箱为空");
         }
         if (isValidUtil.checkEmail(userName)) {
-            return new Result().failure("用户邮箱格式错误");
+            return UserResult.failure("用户邮箱格式错误");
         }
-        if (userPassword == "" || userPassword == null) {
-            return Result.failure("创建用户密码为空");
+        if (StringUtils.isEmpty(userPassword)) {
+            return UserResult.failure("创建用户密码为空");
+        }
+        User user1 = this.selectSimpleUserByEmail(userName);
+        if (user1 != null){
+            return UserResult.failure("用户已存在");
         }
         simpleUser.setUserPassword(Sha1Util.inputPassFormPass(userPassword));
         simpleUser.setUserCreateTime(new Date());
-        return userMapper.insert(simpleUser) > 0 ? Result.success() : Result.failure("创建失败");
+        UserDetail userDetail = new UserDetail();
+        return userMapper.insert(simpleUser) > 0 ? UserResult.success(this.selectSimpleUserByEmail(userName).getUserId(),null) : UserResult.failure("创建失败");
     }
 
     @Override

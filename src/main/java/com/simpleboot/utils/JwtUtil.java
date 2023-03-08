@@ -42,9 +42,17 @@ public class JwtUtil {
                 .setIssuedAt(new Date())
                 .setSubject(userDetail.getUser().getUserName())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(KEY, SignatureAlgorithm.ES512)
+                .signWith(KEY, SignatureAlgorithm.HS512)
                 .compact();
         return compact;
+    }
+    private static Claims parseToken(String token) {
+        return Jwts.parserBuilder()
+                .requireIssuer("user")
+                .setSigningKey(KEY)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     public static String getHeaderToken(HttpServletRequest request) {
@@ -78,14 +86,6 @@ public class JwtUtil {
         }
     }
 
-    private static Claims parseToken(String token) {
-        return Jwts.parserBuilder()
-                .requireIssuer("user")
-                .setSigningKey(KEY)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
 
 
 }

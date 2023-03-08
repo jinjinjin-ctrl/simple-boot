@@ -3,6 +3,7 @@ package com.simpleboot.service;
 import com.simpleboot.entity.User;
 import com.simpleboot.entity.UserDetail;
 import com.simpleboot.entity.vo.Result;
+import com.simpleboot.entity.vo.UserResult;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public interface SimpleUserService {
      * @param simpleUser 用户
      * @return 结果
      */
-    Result<Void> insertSimpleUser(User simpleUser);
+    UserResult insertSimpleUser(User simpleUser);
 
     /**
      * 修改视频

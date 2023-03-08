@@ -8,7 +8,9 @@ import com.simpleboot.service.SimpleUserService;
 import com.simpleboot.utils.JwtUtil;
 import com.simpleboot.utils.Sha1Util;
 import com.simpleboot.utils.isValidUtil;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,11 +20,10 @@ public class SimpleUserController {
     @Resource
     private SimpleUserService userService;
 
-
-
-
     @GetMapping("/")
     public Result getUser(Long user_id, String token) {
+        UserDetail userDetail = JwtUtil.getUserDetail(token);
+        System.out.println(userDetail);
         System.out.println(token);
         User user = userService.selectSimpleUserById(user_id);
         return Result.success("用户信息", user);
@@ -53,7 +54,7 @@ public class SimpleUserController {
 
 
     @PostMapping("/register/")
-    public Result createUser(String username, String password) {
+    public UserResult createUser(String username, String password) {
         User user = new User();
         user.setUserName(username);
         user.setUserPassword(password);
